@@ -1,0 +1,38 @@
+Lauch Bootstrap instance and attach the IAM role
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+ chmod +x kubectl
+ mv kubectl /usr/local/bin/kubectl
+ kubectl version
+ aws --version
+ curl -Lo kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d ‘”‘ -f 4)/kops-linux-amd64
+ chmod +x kops
+ mv kops /usr/local
+ curl -LO https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64
+ chmod +x kops-linux-amd64
+ mv kops-linux-amd64 /usr/local/bin/kops
+ kops version
+ ssh-keygen -t rsa
+export NAME=dptcluster.k8s.local
+export KOPS_STATE_STORE=s3://bucket name
+kops create cluster –zones=us-east-1a ${NAME}
+kops update cluster ${NAME} –yes –admin
+
+Install git
+git clone (Kubernetes)
+kubectl apply -f f....yaml
+kubectl apply -f pv.yaml
+kubectl apply -f elastic...yaml
+Go and See the load balancer is created 
+create the Route53, Create the Record (CNAME)
+
+kubectl get pods
+kubectl get nodes
+kubectl get service
+kubectl get pvc                    ------------->OPTIONAL
+kubectl describe pods 
+kubectl get pods -n kube-system
+kubectl get service -n kube-system
+
+Copy the DNS Name of the LB (not api- Load balancer) DNS ADDRESS:5601
+You see the KIBANA page
+ ----------------------------------
